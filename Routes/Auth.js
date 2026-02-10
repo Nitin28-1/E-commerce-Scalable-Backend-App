@@ -7,7 +7,7 @@ const AuthController=require('../Controllers/AuthController');
 
 router.post('/register',validate(Validation.AuthValidation.registerSchema),AuthController.register);
 router.post('/login',validate(Validation.AuthValidation.loginSchema),AuthController.login);
-router.post('/verify-email',validate(Validation.AuthValidation.verify_token),AuthController.verifyConfirm);
+router.post('/verify-email/:token',validate(Validation.AuthValidation.verify_token),AuthController.verifyConfirm);
 router.post('/forgot-password',validate(Validation.AuthValidation.forgotPasswordSchema),Auth,AuthController.forgotPassword);
 router.post('/set-password',Auth,AuthController.setPassword);
 

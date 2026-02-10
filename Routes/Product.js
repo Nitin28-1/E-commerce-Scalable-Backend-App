@@ -5,8 +5,11 @@ const Auth =require('../Middlewares/AuthMiddleware');
 const Role=require('../Middlewares/RoleMiddleware')
 const validate=require('../Middlewares/Validate');
 const validation=require('../Validations/index')
+const MockAuth=require('../Middlewares/MockAuth')
 
-router.post('/add',Auth,Role('Seller'),validate(validation.ProductValidation.addProductSchema),ProductController.addProduct);
+const isTest=process.env.NODE_ENV == 'test';
+
+router.post('/add',isTest ? MockAuth : Auth,Role('Seller'),validate(validation.ProductValidation.addProductSchema),ProductController.addProduct);
 router.get('/getAll',ProductController.getAllProducts);
 router.get('/get/:productId',ProductController.getSingleProduct);
 router.put('/update/:productId',Auth,Role('Seller'),ProductController.updateProduct);

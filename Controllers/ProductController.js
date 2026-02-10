@@ -4,6 +4,7 @@ const apiResponse=require('../Helpers/apiResponse')
 module.exports.addProduct=async (req,res)=>
 {
     try {
+
         const {title,price,description,categoryId,quantity,image}=req.body;
         
         const product=await model.Product.create({
@@ -27,7 +28,8 @@ module.exports.addProduct=async (req,res)=>
 
 module.exports.getAllProducts=async (req,res)=>
 {
-    try {  
+    try { 
+        console.log('Get all product call ho rha hai');
         const{search,minPrice,maxPrice,categoryId,sort}=req.query;
 
         const filters={};
@@ -65,14 +67,17 @@ module.exports.getAllProducts=async (req,res)=>
         )
 
     } catch (error) {
+        console.log(error);
         return apiResponse.ErrorResponse(res,"Failed To Get All Products.")
     }
 }
 module.exports.getSingleProduct=async (req,res)=>
 {
     try {
+        console.log("singlep product calling")
+     
         const {productId}=req.params
-        
+           console.log(productId)
         const product=await model.Product.findOne({
             _id:productId,
             isActive:true
@@ -88,6 +93,7 @@ module.exports.getSingleProduct=async (req,res)=>
         )
 
     } catch (error) {
+        console.log(error)
         return apiResponse.ErrorResponse(res,"Failed To Fetch Product.")
     }
 }

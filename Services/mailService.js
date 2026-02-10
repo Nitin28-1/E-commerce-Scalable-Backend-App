@@ -30,6 +30,7 @@ const sendEmail=async(to,subject,html)=>
 const sendRegisterEmail=async (user,verificationURL)=>
 {
     try {
+        console.log("registration email ja rhi hai ....");
         const html=emailTemplate.registerEmail(user,verificationURL)
         await sendEmail(user.email,
             "User Registration Verification Email.",

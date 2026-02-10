@@ -63,7 +63,7 @@ module.exports.register=async (req,res,next)=>
 module.exports.verifyConfirm= async (req,res)=>
 {
     try {
-        const {token}=req.body;
+        const {token}=req.params;
 
         const user = await model.User.findOne({
             confirmationToken:token
@@ -99,7 +99,8 @@ module.exports.verifyConfirm= async (req,res)=>
 module.exports.login=async (req,res)=>
 {
     try {
-        
+        console.log('Login Controller Mai call aa rhi hia');
+        console.log(req.body);
         const {email,password} =req.body;
 
         const user=await model.User.findOne({
@@ -139,7 +140,7 @@ module.exports.login=async (req,res)=>
         return apiResponse.unauthorizedResponse(res,'User not exist for this email.');
 
     } catch (error) {
-        
+        console.log(error)
         return apiResponse.ErrorResponse(res,"Failed To Login User");
     }
 }
